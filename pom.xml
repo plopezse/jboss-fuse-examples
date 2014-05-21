@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.jboss.fuse</groupId>
+  <artifactId>simple-demo</artifactId>
+  <version>1.0.0</version>
+  <name>JBoss Fuse simple demo</name>
+  <packaging>bundle</packaging>
+
+  <properties>
+    <servicemix.osgi.import>
+      *
+    </servicemix.osgi.import>
+    <servicemix.osgi.export>
+      org.apache.camel.demo.camel_wmq_amq_xa_tx,
+      org.springframework.jms.connection.xa
+    </servicemix.osgi.export>
+    <servicemix.osgi.bundles />
+    <servicemix.osgi.dynamic.import />
+
+    <camel.version>2.10.0.fuse-71-047</camel.version>
+    <activemq.version>5.8.0.redhat-60024</activemq.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-spring</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-client</artifactId>
+      <version>${activemq.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.activemq</groupId>
+      <artifactId>activemq-pool</artifactId>
+      <version>${activemq.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jms</artifactId>
+        <version>3.2.4.RELEASE</version>
+        <type>jar</type>
+        <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>fusesource.release</id>
+      <name>FuseSource Release Repo</name>
+      <url>http://repo.fusesource.com/nexus/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+  <repositories>
+    <repository>
+      <id>fusesource.release</id>
+      <name>FuseSource Release Repo</name>
+      <url>http://repo.fusesource.com/nexus/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>2.3.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>${servicemix.osgi.export}</Export-Package>
+            <Import-Package>${servicemix.osgi.import}</Import-Package>
+            <Require-Bundle>${servicemix.osgi.bundles}</Require-Bundle>
+            <DynamicImport-Package>${servicemix.osgi.dynamic.import}</DynamicImport-Package>
+            <Private-Package>${servicemix.osgi.private}</Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.0</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
