@@ -13,12 +13,12 @@
 
 	<camelContext trace="false" id="blueprintContext" xmlns="http://camel.apache.org/schema/blueprint" xmlns:order="http://fusesource.com/examples/order/v7">
     <route id="folter-to-folder">
-        <from uri="file:/opt/fuse-6.1/test/filesystem/from-dir"/>
+        <from uri="file:/opt/jboss-fuse-examples/test/filesystem/from-dir"/>
         <log message="The message contains ${body}"/>
-        <to uri="file:/opt/fuse-6.1/test/filesystem/to-dir"/>
+        <to uri="file:/opt/jboss-fuse-examples/test/filesystem/to-dir"/>
     </route>
     <route id="folder-to-queue">
-        <from uri="file:/opt/fuse-6.1/test/jms/from-dir"/>
+        <from uri="file:/opt/jboss-fuse-examples/test/jms/from-dir"/>
         <log message="The message contains ${body}"/>
         <convertBodyTo type="java.lang.String"/>
         <to uri="activemq:queue:fileQueue"/>
@@ -26,7 +26,7 @@
     <route id="queue-to-folder">
         <from uri="activemq:queue:fileQueue"/>
         <log message="The message contains ${body}"/>
-        <to uri="file:/opt/fuse-6.1/test/jms/to-dir"/>
+        <to uri="file:/opt/jboss-fuse-examples/test/jms/to-dir"/>
     </route>
 </camelContext>
 
